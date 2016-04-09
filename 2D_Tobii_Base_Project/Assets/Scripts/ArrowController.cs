@@ -9,7 +9,9 @@ public class ArrowController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rigidBody = GetComponent<Rigidbody2D> ();
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Weapon", "Tower" });
+
+        rigidBody = GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
@@ -28,5 +30,11 @@ public class ArrowController : MonoBehaviour {
 			transform.Rotate (new Vector3 (0, 0, -partialTurn));
 		}
 
-	}
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Weapon", "Tower" });
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Destroy(gameObject);
+    }
 }
