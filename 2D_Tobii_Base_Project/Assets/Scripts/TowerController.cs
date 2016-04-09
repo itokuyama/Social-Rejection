@@ -17,6 +17,8 @@ public class TowerController : MonoBehaviour {
 	float chargeFactor = 0.0f;
 	public float lineWidthMin;
 	public float lineWidthExpand;
+    public float health;
+    public float totalHealth;
 
 	// When you can take the next shot
 	float reloadFinished;
@@ -27,6 +29,8 @@ public class TowerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lineRenderer = GetComponent<LineRenderer> ();
+
+        health = totalHealth;
 	}
 	
 	// Update is called once per frame
@@ -90,5 +94,18 @@ public class TowerController : MonoBehaviour {
 
 			lineRenderer.SetWidth (lineWidthMin, lineWidthMin);
 		}
-	}
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            health -= 1;
+        }
+    }
 }
