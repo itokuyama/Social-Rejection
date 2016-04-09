@@ -19,6 +19,7 @@ public class TowerController : MonoBehaviour {
 	public float lineWidthExpand;
     public float health;
     public float totalHealth;
+    public GameObject healthBar;
 
 	// When you can take the next shot
 	float reloadFinished;
@@ -31,6 +32,8 @@ public class TowerController : MonoBehaviour {
 		lineRenderer = GetComponent<LineRenderer> ();
 
         health = totalHealth;
+
+        healthBar = GameObject.FindWithTag("TowerHealthBar");
 	}
 	
 	// Update is called once per frame
@@ -94,6 +97,9 @@ public class TowerController : MonoBehaviour {
 
 			lineRenderer.SetWidth (lineWidthMin, lineWidthMin);
 		}
+
+        healthBar.transform.localScale = new Vector3(4 * (health / totalHealth), 0.2f, 1);
+        healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector3(-200 * (1 - health/totalHealth), -50, 0);
 
         if (health <= 0)
         {
