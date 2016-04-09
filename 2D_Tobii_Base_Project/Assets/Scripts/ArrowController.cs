@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ArrowController : MonoBehaviour {
 
-	public float destroyWhenBelow = -10;
-	public float turnRate = 0.1f;
+	public float destroyWhenBelow;
+	public float turnRate;
 	Rigidbody2D rigidBody;
 
 	// Use this for initialization
@@ -21,7 +21,6 @@ public class ArrowController : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		Vector2 currentVel = rigidBody.velocity;
 		float turnRotation = Vector3.Angle (transform.up, rigidBody.velocity);
 		float partialTurn = Mathf.Lerp (turnRotation, 0, 1 - turnRate);
 		if (rigidBody.velocity.x < 0) {
