@@ -6,6 +6,7 @@ public class EnemySpawning : MonoBehaviour {
     public bool isSpawning;
     public bool leftSpawning;
     public bool rightSpawning;
+    public bool spawningGround;
     public GameObject toSpawn;
     private float spawnTime;
 
@@ -22,11 +23,25 @@ public class EnemySpawning : MonoBehaviour {
         {
             if (leftSpawning)
             {
-                spawnAir(-6, 4.5f, -4.5f);
+                if (spawningGround)
+                {
+                    spawnGround(-6);
+                }
+                else
+                {
+                    spawnAir(-6, 4.5f, -4.5f);
+                }
             }
             if (rightSpawning)
             {
-                spawnAir(6, 4.5f, -4.5f);
+                if (spawningGround)
+                {
+                    spawnGround(6);
+                }
+                else
+                {
+                    spawnAir(6, 4.5f, -4.5f);
+                }
             }
 
             spawnTime += 1 / spawnRate;
@@ -42,5 +57,10 @@ public class EnemySpawning : MonoBehaviour {
         float spawnPlace = Random.Range(bottomBound, topBound);
 
         Instantiate(toSpawn, new Vector3(pos, spawnPlace, 0), Quaternion.Euler(0, 0, 0));
+    }
+
+    void spawnGround(float pos)
+    {
+        Instantiate(toSpawn, new Vector3(pos, -3, 0), Quaternion.Euler(0, 0, 0));
     }
 }
