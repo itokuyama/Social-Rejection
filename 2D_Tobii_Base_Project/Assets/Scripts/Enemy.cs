@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour {
         {
             Destroy(gameObject); //Enemy dies
         }
+
+        Destroy(gameObject, 3);
 	}
 
     void OnCollisionEnter2D(Collider2D other)

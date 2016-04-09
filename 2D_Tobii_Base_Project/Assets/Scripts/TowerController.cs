@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class tower_controller : MonoBehaviour {
+public class TowerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

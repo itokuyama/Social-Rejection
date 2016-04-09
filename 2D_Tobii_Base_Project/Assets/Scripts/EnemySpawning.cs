@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public class EnemySpawning : MonoBehaviour {
     public float spawnRate;
@@ -7,21 +9,34 @@ public class EnemySpawning : MonoBehaviour {
     public bool leftSpawning;
     public bool rightSpawning;
     public bool spawningGround;
-    public GameObject toSpawn;
-    private float spawnTime;
+    public int remaining;
+    private LevelData data;
+    private GameObject toSpawn;
+    public float spawnTime;
+    private Level levelTracker;
 
 	// Use this for initialization
 	void Start ()
     {
-        spawnTime = 0;
+        levelTracker = GameObject.FindWithTag("GameController").GetComponent<Level>();
+
+        data = GameObject.FindWithTag("EditorOnly").GetComponent<LevelData>();
+
+        spawnTime = levelTracker.preTime;
+
+        remaining = data.numberOfEnemies[levelTracker.level - 1];
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    if (isSpawning & spawnTime <= 0)
+        spawnRate = data.spawnRates[levelTracker.level - 1];
+
+        toSpawn = data.enemyTypes[levelTracker.level - 1];
+
+        if (isSpawning & spawnTime <= 0)
         {
-            if (leftSpawning)
+            if (leftSpawning & remaining > 0)
             {
                 if (spawningGround)
                 {
@@ -31,8 +46,9 @@ public class EnemySpawning : MonoBehaviour {
                 {
                     spawnAir(-6, 4.5f, -4.5f);
                 }
+                remaining -= 1;
             }
-            if (rightSpawning)
+            if (rightSpawning & remaining > 0)
             {
                 if (spawningGround)
                 {
@@ -42,6 +58,7 @@ public class EnemySpawning : MonoBehaviour {
                 {
                     spawnAir(6, 4.5f, -4.5f);
                 }
+                remaining -= 1;
             }
 
             spawnTime += 1 / spawnRate;
@@ -54,7 +71,7 @@ public class EnemySpawning : MonoBehaviour {
 
     void spawnAir (float pos, float topBound, float bottomBound)
     {
-        float spawnPlace = Random.Range(bottomBound, topBound);
+        float spawnPlace = UnityEngine.Random.Range(bottomBound, topBound);
 
         Instantiate(toSpawn, new Vector3(pos, spawnPlace, 0), Quaternion.Euler(0, 0, 0));
     }
