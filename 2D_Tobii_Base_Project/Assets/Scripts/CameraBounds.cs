@@ -18,6 +18,8 @@ public class CameraBounds : MonoBehaviour {
 
     public float heightOffset;
 
+	bool startShake = true;
+
 	// Use this for initialization
 	void Start () {
         Camera camera = GetComponent<Camera>();
@@ -36,6 +38,11 @@ public class CameraBounds : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
+		if (startShake && Time.time > 5) {
+			startShake = false;
+			Camera.main.GetComponent<ScreenShake> ().Shake ();
+		}
+
         var lastGazePoint = GetComponent<GazePointDataComponent>().LastGazePoint;
         panningRect.center = transform.position;
 
@@ -51,7 +58,6 @@ public class CameraBounds : MonoBehaviour {
             {
                 Vector3 cameraMove = Vector3.Lerp(transform.position, eyePos, cameraSpeed);
                 transform.position = cameraMove;
-                Vector3 targetPos = new Vector3();
                 if (transform.position.x - halfWidth < boundingRect.xMin)
                 {
                     transform.position = new Vector3(boundingRect.xMin + halfWidth, transform.position.y, 0);
