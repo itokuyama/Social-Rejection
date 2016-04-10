@@ -10,35 +10,49 @@ public class EnemySpawning : MonoBehaviour {
     public bool rightSpawning;
     public bool spawningGround;
     public int remaining;
-    private LevelData data;
     public GameObject toSpawn;
     public float spawnTime;
-    private Level levelTracker;
+    public Level condTracker;
 
 	// Use this for initialization
 	void Start ()
     {
-        levelTracker = GameObject.FindWithTag("GameController").GetComponent<Level>();
-
-        data = GameObject.FindWithTag("EditorOnly").GetComponent<LevelData>();
-
-        
+        condTracker = GameObject.FindWithTag("GameController").GetComponent<Level>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log(condTracker.condition);
+        if (condTracker.condition == "ground" | condTracker.condition == "boss")
+        {
+            spawningGround = true;
+        }
+        else
+        {
+            spawningGround = false;
+        }
+
+        if (GameObject.FindWithTag("Events").GetComponent<MenuScript>().state == 2)
+        {
+            isSpawning = true;
+        }
+        else
+        {
+            isSpawning = false;
+        }
+
         if (isSpawning & spawnTime <= 0)
         {
             if (leftSpawning & remaining > 0)
             {
                 if (spawningGround)
                 {
-                    spawnGround(-6);
+                    spawnGround(-15);
                 }
                 else
                 {
-                    spawnAir(-6, 4.5f, -4.5f);
+                    spawnAir(-15, 10, -10);
                 }
                 remaining -= 1;
             }
@@ -46,18 +60,18 @@ public class EnemySpawning : MonoBehaviour {
             {
                 if (spawningGround)
                 {
-                    spawnGround(6);
+                    spawnGround(15);
                 }
                 else
                 {
-                    spawnAir(6, 4.5f, -4.5f);
+                    spawnAir(15, 10, -10);
                 }
                 remaining -= 1;
             }
 
             spawnTime += 1 / spawnRate;
         }
-        else if (spawnTime >= 0)
+        else if (spawnTime >= 0 & isSpawning)
         {
             spawnTime -= Time.deltaTime;
         }
@@ -67,7 +81,11 @@ public class EnemySpawning : MonoBehaviour {
     {
         float spawnPlace = UnityEngine.Random.Range(bottomBound, topBound);
 
-        Instantiate(toSpawn, new Vector3(pos, spawnPlace, 0), Quaternion.Euler(0, 0, 0));
+        Vector3 spawnPos = new Vector3(pos, spawnPlace, 0);
+
+        float angle = PublicFunctions.FindAngle((spawnPos - GameObject.FindWithTag("Tower").transform.position).normalized.x, (spawnPos - GameObject.FindWithTag("Tower").transform.position).normalized.y);
+
+        Instantiate(toSpawn, new Vector3(pos, spawnPlace, 0), Quaternion.Euler(0, 0, angle + 90));
     }
 
     void spawnGround(float pos)

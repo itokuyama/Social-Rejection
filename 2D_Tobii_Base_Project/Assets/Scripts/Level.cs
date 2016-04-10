@@ -12,6 +12,8 @@ public class Level : MonoBehaviour {
     public float preTime;
     public float postTime;
     private bool alreadyChanged;
+    public string condition;
+    private MenuScript states;
 
 	// Use this for initialization
 	void Start ()
@@ -21,6 +23,7 @@ public class Level : MonoBehaviour {
         enemyTracker = GameObject.FindWithTag("Spawner").GetComponent<EnemySpawning>();
         statTracker = GameObject.FindWithTag("EditorOnly").GetComponent<LevelData>();
         towerStuff = GameObject.FindWithTag("Tower").GetComponent<TowerController>();
+        states = GameObject.FindWithTag("Events").GetComponent<MenuScript>();
 
         alreadyChanged = false;
 
@@ -31,6 +34,8 @@ public class Level : MonoBehaviour {
         enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
 
         postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+
+        condition = statTracker.GetLevel(level)[6];
     }
 	
 	// Update is called once per frame
@@ -38,17 +43,19 @@ public class Level : MonoBehaviour {
     {
         enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
 
-        int enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy").GetLength(0);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-	    if (enemyTracker.remaining == 0 & enemiesLeft == 0 & !alreadyChanged)
+        int enemiesLeft = enemies.GetLength(0);
+
+	    if (enemyTracker.remaining == 0 & enemiesLeft == 0 & !alreadyChanged & states.state == 2)
         {
             if (level == statTracker.levelConfigs.GetLength(0) - 1)
             {
-                towerStuff.winText.SetActive(true);
+                states.state = 3;
             }
             else
             {
-                StartCoroutine(LevelChange());
+                StartCoroutine(LevelChange(false));
                 alreadyChanged = true;
             }
         }
@@ -56,21 +63,68 @@ public class Level : MonoBehaviour {
         {
             alreadyChanged = false;
         }
+
+        if (states.state == 3 & !towerStuff.lost)
+        {
+            towerStuff.winText.SetActive(true);
+            towerStuff.loseText.SetActive(false);
+        }
+        else if (states.state == 3 & towerStuff.lost)
+        {
+            towerStuff.winText.SetActive(false);
+            towerStuff.loseText.SetActive(true);
+            foreach (GameObject toBeGone in enemies)
+            {
+                Destroy(toBeGone);
+            }
+        }
+        else
+        {
+            towerStuff.winText.SetActive(false);
+            towerStuff.loseText.SetActive(false);
+        }
 	}
 
-    IEnumerator LevelChange ()
+    public IEnumerator LevelChange (bool restart)
     {
-        yield return new WaitForSeconds(postTime);
+        if (!restart)
+        {
+            yield return new WaitForSeconds(postTime);
 
-        level++;
+            level++;
 
-        enemyTracker.spawnRate = Convert.ToInt32(statTracker.GetLevel(level)[1]);
+            enemyTracker.spawnRate = Convert.ToSingle(statTracker.GetLevel(level)[1]);
 
-        enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
+            enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
 
-        enemyTracker.spawnTime =  Convert.ToInt32(statTracker.GetLevel(level)[4]);
-        postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+            enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
 
-        enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
+            enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
+            postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+
+            condition = statTracker.GetLevel(level)[6];
+
+            GameObject.Find(string.Format("Level{0}Text", level)).GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
+            yield return new WaitForSeconds(Convert.ToInt32(statTracker.GetLevel(level)[4]));
+            GameObject.Find(string.Format("Level{0}Text", level)).GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 3000, 0);
+        }
+        else if (restart)
+        {
+            level = 1;
+
+            towerStuff.health = towerStuff.totalHealth;
+
+            enemyTracker.spawnRate = Convert.ToSingle(statTracker.GetLevel(level)[1]);
+
+            enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
+
+            enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
+
+            enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
+            postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+
+            condition = statTracker.GetLevel(level)[6];
+        }
+        Debug.Log(condition);
     }
 }

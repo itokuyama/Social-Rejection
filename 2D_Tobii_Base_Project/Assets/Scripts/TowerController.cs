@@ -22,6 +22,9 @@ public class TowerController : MonoBehaviour {
     public GameObject healthBar;
     public GameObject loseText;
     public GameObject winText;
+    private GameObject healthBack;
+    public bool lost;
+
 
 	// When you can take the next shot
 	float reloadFinished;
@@ -36,10 +39,25 @@ public class TowerController : MonoBehaviour {
         health = totalHealth;
 
         healthBar = GameObject.FindWithTag("TowerHealthBar");
+        healthBack = GameObject.FindWithTag("HealthBack");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        MenuScript states = GameObject.FindWithTag("Events").GetComponent<MenuScript>();
+        Level condTracker = GameObject.FindWithTag("GameController").GetComponent<Level>();
+
+        if (states.state == 2)
+        {
+            healthBar.SetActive(true);
+            healthBack.SetActive(true);
+        }
+        else
+        {
+            healthBar.SetActive(false);
+            healthBack.SetActive(false);
+        }
+
 		Vector3 offsetPos = transform.position + new Vector3(0, offsetHeight, 0);
 
 		// Draw line to mouse position
@@ -51,8 +69,8 @@ public class TowerController : MonoBehaviour {
 		lineRenderer.SetPosition (0, offsetPos);
 		lineRenderer.SetPosition (1, mousePositionConverted);
 
-		// On left button press spawn arrow
-		if (Input.GetMouseButton (0) && !charging) {
+        // On left button press spawn arrow
+		if (Input.GetMouseButton (0) && !charging && condTracker.condition != "end") {
 			if (Time.time > reloadFinished) {
 				reloadFinished = Time.time + reloadDelay;
 				charging = true;
@@ -105,8 +123,8 @@ public class TowerController : MonoBehaviour {
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            loseText.SetActive(true);
+            lost = true;
+            states.state = 3;
         }
     }
 
