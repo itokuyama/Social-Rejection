@@ -16,6 +16,8 @@ public class CameraBounds : MonoBehaviour {
     private float halfHeight;
     private float halfWidth;
 
+    public float heightOffset;
+
 	// Use this for initialization
 	void Start () {
         Camera camera = GetComponent<Camera>();
@@ -25,7 +27,7 @@ public class CameraBounds : MonoBehaviour {
         panningRect = new Rect(0, 0, panningWidthFactor * cameraWidth, panningHeightFactor * cameraHeight);
 
         boundingRect = new Rect(0, 0, boundingWidth, boundingHeight);
-        boundingRect.center = Vector3.zero;
+        boundingRect.center = Vector3.zero + new Vector3 (0, heightOffset, 0);
 
         halfHeight = cameraHeight / 2;
         halfWidth = cameraWidth / 2;

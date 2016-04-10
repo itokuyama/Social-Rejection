@@ -161,6 +161,11 @@ public class BirdsEyeNavigation : MonoBehaviour
             y = _rendererComponent.bounds.max.y;
         }
 
+        if (x < background.)
+        {
+
+        }
+
         _targetPosition = new Vector3(x, y, _targetPosition.z);
     }
 
