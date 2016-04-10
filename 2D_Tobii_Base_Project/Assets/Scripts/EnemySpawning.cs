@@ -24,7 +24,7 @@ public class EnemySpawning : MonoBehaviour {
 	void Update ()
     {
         Debug.Log(condTracker.condition);
-        if (condTracker.condition == "ground")
+        if (condTracker.condition == "ground" | condTracker.condition == "boss" | condTracker.condition == "final")
         {
             spawningGround = true;
         }
@@ -48,11 +48,11 @@ public class EnemySpawning : MonoBehaviour {
             {
                 if (spawningGround)
                 {
-                    spawnGround(-6);
+                    spawnGround(-15);
                 }
                 else
                 {
-                    spawnAir(-6, 4.5f, -4.5f);
+                    spawnAir(-15, 10, -10);
                 }
                 remaining -= 1;
             }
@@ -60,11 +60,11 @@ public class EnemySpawning : MonoBehaviour {
             {
                 if (spawningGround)
                 {
-                    spawnGround(6);
+                    spawnGround(15);
                 }
                 else
                 {
-                    spawnAir(6, 4.5f, -4.5f);
+                    spawnAir(15, 10, -10);
                 }
                 remaining -= 1;
             }

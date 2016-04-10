@@ -43,7 +43,6 @@ public class CameraBounds : MonoBehaviour {
         if (lastGazePoint.IsValid)
         {
             screenSpace = lastGazePoint.Screen;
-            float cameraDistance = Camera.main.transform.position.z;
             Vector3 eyePos = Camera.main.ScreenToWorldPoint(screenSpace);
 
             transform.position += new Vector3(0, 0, 10);
@@ -51,7 +50,6 @@ public class CameraBounds : MonoBehaviour {
             {
                 Vector3 cameraMove = Vector3.Lerp(transform.position, eyePos, cameraSpeed);
                 transform.position = cameraMove;
-                Vector3 targetPos = new Vector3();
                 if (transform.position.x - halfWidth < boundingRect.xMin)
                 {
                     transform.position = new Vector3(boundingRect.xMin + halfWidth, transform.position.y, 0);
