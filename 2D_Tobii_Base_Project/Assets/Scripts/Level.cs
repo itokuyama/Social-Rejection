@@ -12,6 +12,7 @@ public class Level : MonoBehaviour {
     public float preTime;
     public float postTime;
     private bool alreadyChanged;
+    public string condition;
 
 	// Use this for initialization
 	void Start ()
@@ -31,24 +32,28 @@ public class Level : MonoBehaviour {
         enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
 
         postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+
+        condition = statTracker.GetLevel(level)[6];
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        MenuScript states = GameObject.FindWithTag("Events").GetComponent<MenuScript>();
+
         enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
 
         int enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy").GetLength(0);
 
-	    if (enemyTracker.remaining == 0 & enemiesLeft == 0 & !alreadyChanged)
+	    if (enemyTracker.remaining == 0 & enemiesLeft == 0 & !alreadyChanged & states.state == 2)
         {
             if (level == statTracker.levelConfigs.GetLength(0) - 1)
             {
-                towerStuff.winText.SetActive(true);
+                states.state = 3;
             }
             else
             {
-                StartCoroutine(LevelChange());
+                StartCoroutine(LevelChange(false));
                 alreadyChanged = true;
             }
         }
@@ -56,21 +61,58 @@ public class Level : MonoBehaviour {
         {
             alreadyChanged = false;
         }
+
+        if (states.state == 3 & !towerStuff.lost)
+        {
+            towerStuff.winText.SetActive(true);
+            towerStuff.loseText.SetActive(false);
+        }
+        else if (states.state == 3 & towerStuff.lost)
+        {
+            towerStuff.winText.SetActive(false);
+            towerStuff.loseText.SetActive(true);
+        }
+        else
+        {
+            towerStuff.winText.SetActive(false);
+            towerStuff.loseText.SetActive(false);
+        }
 	}
 
-    IEnumerator LevelChange ()
+    public IEnumerator LevelChange (bool restart)
     {
-        yield return new WaitForSeconds(postTime);
+        if (!restart)
+        {
+            yield return new WaitForSeconds(postTime);
 
-        level++;
+            level++;
 
-        enemyTracker.spawnRate = Convert.ToInt32(statTracker.GetLevel(level)[1]);
+            enemyTracker.spawnRate = Convert.ToSingle(statTracker.GetLevel(level)[1]);
 
-        enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
+            enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
 
-        enemyTracker.spawnTime =  Convert.ToInt32(statTracker.GetLevel(level)[4]);
-        postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+            enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
 
-        enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
+            enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
+            postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+
+            condition = statTracker.GetLevel(level)[6];
+        }
+        else if (restart)
+        {
+            level = 1;
+
+            enemyTracker.spawnRate = Convert.ToSingle(statTracker.GetLevel(level)[1]);
+
+            enemyTracker.toSpawn = statTracker.enemyTypes[statTracker.GetLevel(level)[2]];
+
+            enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
+
+            enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
+            postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
+
+            condition = statTracker.GetLevel(level)[6];
+        }
+        Debug.Log(condition);
     }
 }
