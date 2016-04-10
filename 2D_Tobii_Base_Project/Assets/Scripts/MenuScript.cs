@@ -55,6 +55,8 @@ public class MenuScript : MonoBehaviour {
         {
             StartCoroutine(GameObject.FindWithTag("GameController").GetComponent<Level>().LevelChange(true));
             switchState(1);
+			GameObject nightOverlay = GameObject.FindGameObjectWithTag ("NightOverlay");
+			nightOverlay.GetComponent<NightOverlayController> ().Reload ();
         }
     }
 

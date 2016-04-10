@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CelestialObjectController : MonoBehaviour {
 	public Sprite sun;
+	public Sprite moon;
 	float speed;
 	public float speedMin;
 	public float speedMax;
@@ -28,5 +29,9 @@ public class CelestialObjectController : MonoBehaviour {
 	// Call this to switch a moon to a sun
 	public void SwitchToSun() {
 		GetComponent<SpriteRenderer> ().sprite = sun;
+	}
+
+	public void SwitchToMoon() {
+		GetComponent<SpriteRenderer> ().sprite = moon;
 	}
 }

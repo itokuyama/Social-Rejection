@@ -26,6 +26,11 @@ public class TowerController : MonoBehaviour {
     public bool lost;
     bool playsound = true;
 
+	public Texture2D cursorIdle;
+	public Texture2D cursorHold;
+	public CursorMode cursorMode = CursorMode.Auto;
+	public Vector2 hotspot = Vector2.zero;
+
     public AudioClip TowerDamage;
 
     // When you can take the next shot
@@ -42,6 +47,8 @@ public class TowerController : MonoBehaviour {
 
         healthBar = GameObject.FindWithTag("TowerHealthBar");
         healthBack = GameObject.FindWithTag("HealthBack");
+
+		Cursor.SetCursor (cursorIdle, hotspot, cursorMode);
 	}
 	
 	// Update is called once per frame
@@ -74,12 +81,14 @@ public class TowerController : MonoBehaviour {
         // On left button press spawn arrow
 		if (Input.GetMouseButton (0) && !charging && condTracker.condition != "end") {
 			if (Time.time > reloadFinished) {
+				Cursor.SetCursor (cursorHold, hotspot, cursorMode);
 				reloadFinished = Time.time + reloadDelay;
 				charging = true;
 			}
 		}
 
 		if (charging) {
+			Camera.main.GetComponent<ScreenShake> ().Shake (0.02f, 0.01f);
 			chargeTime += Time.deltaTime;
 			if (chargeTime > chargeTimeMax) {
 				chargeFactor = chargeFactorMax;
@@ -91,6 +100,7 @@ public class TowerController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp (0) && charging) {
+			Cursor.SetCursor (cursorIdle, hotspot, cursorMode);
 			GameObject arrow = GameObject.Instantiate (arrowPrefab);
 
 			// Fire in direction of mouse with shooting power
