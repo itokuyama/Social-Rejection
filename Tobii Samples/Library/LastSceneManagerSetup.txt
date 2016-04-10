@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/EyeXDemos/MapNavigation/MapNavigationScene.unity
+  isLoaded: 1
+  isActive: 1
