@@ -6,13 +6,13 @@ public class EnemyFlying : MonoBehaviour {
     public int health;
     public int totalHealth;
     public float speed;
-    private GameObject target;
+    //private GameObject target;
 
     // Use this for initialization
     void Start()
     {
         health = totalHealth; //Sets health to max value
-        target = GameObject.FindWithTag("Tower"); //Sets the target destination as the tower
+        //target = GameObject.FindWithTag("Tower"); //Sets the target destination as the tower
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy" });
     }
@@ -20,7 +20,7 @@ public class EnemyFlying : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Vector3 difference = target.transform.position - gameObject.transform.position;//Gets difference between self and target
+        //Vector3 difference = target.transform.position - gameObject.transform.position;//Gets difference between self and target
 
         Vector3 direction = new Vector3(0, 1, 0); //Sets enemy to always be travelling toward the tower
 
