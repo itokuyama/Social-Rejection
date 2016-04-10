@@ -27,7 +27,13 @@ public class SoundManager : MonoBehaviour {
         efxSource.Play();
     }
 
+    public void RandomizeSfx (params AudioClip [] clips)
+    {
+        int randomIndex = Random.Range(0, clips.Length);
 
+        efxSource.clip = clips[randomIndex];
+        efxSource.Play();
+    }
 	
 	// Update is called once per frame
 	void Update () {
