@@ -80,7 +80,7 @@ public class TowerController : MonoBehaviour {
 		lineRenderer.SetPosition (1, mousePositionConverted);
 
         // On left button press spawn arrow
-		if (Input.GetMouseButton (0) && !charging && condTracker.condition != "end") {
+		if (Input.GetMouseButton (0) && !charging && (condTracker.condition != "final" | states.state != 2)) {
 			if (Time.time > reloadFinished) {
 				Cursor.SetCursor (cursorHold, hotspot, cursorMode);
 				reloadFinished = Time.time + reloadDelay;
