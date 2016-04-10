@@ -11,7 +11,7 @@ public class EnemySpawning : MonoBehaviour {
     public bool spawningGround;
     public int remaining;
     private LevelData data;
-    private GameObject toSpawn;
+    public GameObject toSpawn;
     public float spawnTime;
     private Level levelTracker;
 
@@ -22,18 +22,12 @@ public class EnemySpawning : MonoBehaviour {
 
         data = GameObject.FindWithTag("EditorOnly").GetComponent<LevelData>();
 
-        spawnTime = levelTracker.preTime;
-
-        remaining = data.numberOfEnemies[levelTracker.level - 1];
+        
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        spawnRate = data.spawnRates[levelTracker.level - 1];
-
-        toSpawn = data.enemyTypes[levelTracker.level - 1];
-
         if (isSpawning & spawnTime <= 0)
         {
             if (leftSpawning & remaining > 0)
