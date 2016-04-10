@@ -104,6 +104,15 @@ public class Level : MonoBehaviour {
 
             condition = statTracker.GetLevel(level)[6];
 
+            if (condition == "final")
+            {
+                GameObject.FindWithTag("NightOverlay").GetComponent<NightOverlayController>().opacityTrigger = false;
+                foreach (GameObject celestialObject in GameObject.FindGameObjectsWithTag("CelestialObject"))
+                {
+                    celestialObject.GetComponent<CelestialObjectController>().SwitchToSun();
+                }
+            }
+
             GameObject.Find(string.Format("Level{0}Text", level)).GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
             yield return new WaitForSeconds(Convert.ToInt32(statTracker.GetLevel(level)[4]));
             GameObject.Find(string.Format("Level{0}Text", level)).GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 3000, 0);
