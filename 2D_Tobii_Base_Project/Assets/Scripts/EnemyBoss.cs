@@ -7,6 +7,9 @@ public class EnemyBoss : MonoBehaviour {
     public int totalHealth;
     public float speed;
     private GameObject target;
+    private Vector3 difference;
+    public GameObject minion;
+    public float minionSpawn;
 
     // Use this for initialization
     void Start()
@@ -14,15 +17,28 @@ public class EnemyBoss : MonoBehaviour {
         health = totalHealth; //Sets health to max value
         target = GameObject.FindWithTag("Tower"); //Sets the target destination as the tower
 
+       
+
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy" });
 
-        gameObject.transform.localScale = new Vector3(5, 5, 5);
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
+
+        minionSpawn = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 difference = target.transform.position - gameObject.transform.position;//Gets difference between self and target
+        difference = target.transform.position - gameObject.transform.position;//Gets difference between self and target
+
+        if (minionSpawn <= 0)
+        {
+            SpawnMinion();
+        }
+        else
+        {
+            minionSpawn -= Time.deltaTime;
+        }
 
         Vector3 direction = new Vector3(difference.x, difference.y, 0); //Sets enemy to always be travelling toward the tower
 
@@ -46,5 +62,16 @@ public class EnemyBoss : MonoBehaviour {
         {
             Destroy(gameObject); //Enemy dies when it reaches tower
         }
+    }
+
+    void SpawnMinion()
+    {
+        Vector3 spawnPos = new Vector3(gameObject.transform.position.x, Random.Range(-3, 5), 0);
+
+        float angle = PublicFunctions.FindAngle((spawnPos - target.transform.position).normalized.x, (spawnPos - target.transform.position).normalized.y);
+
+        Instantiate(minion, spawnPos, Quaternion.Euler(0, 0, angle + 90));
+
+        minionSpawn += difference.magnitude * 0.1f;
     }
 }

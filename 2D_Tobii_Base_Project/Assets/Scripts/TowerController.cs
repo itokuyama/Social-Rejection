@@ -123,8 +123,8 @@ public class TowerController : MonoBehaviour {
 
         if (health <= 0)
         {
-            Destroy(gameObject);
             lost = true;
+            states.state = 3;
         }
     }
 
