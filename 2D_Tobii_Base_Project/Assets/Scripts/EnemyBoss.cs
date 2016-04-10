@@ -78,6 +78,6 @@ public class EnemyBoss : MonoBehaviour {
 
         Instantiate(minion, spawnPos, Quaternion.Euler(0, 0, angle + 90));
 
-        minionSpawn += difference.magnitude * 0.1f;
+        minionSpawn += difference.magnitude * 0.15f;
     }
 }

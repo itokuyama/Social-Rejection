@@ -13,7 +13,9 @@ public class Button : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	
+        GameObject camera = GameObject.FindWithTag("MainCamera");
+
+        gameObject.transform.position = camera.transform.position + new Vector3(2, 2, 0);
 	}
 
     void OnCollisionEnter2D(Collision2D other)
