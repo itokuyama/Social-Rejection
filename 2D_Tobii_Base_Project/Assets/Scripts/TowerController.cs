@@ -137,8 +137,15 @@ public class TowerController : MonoBehaviour {
 
         if (health <= 0)
         {
-            lost = true;
-            states.state = 3;
+            if (condTracker.condition == "final")
+            {
+                states.state = 3;
+            }
+            else
+            {
+                lost = true;
+                states.state = 3;
+            }
             if (playsound)
             {
                 playsound = !playsound;
