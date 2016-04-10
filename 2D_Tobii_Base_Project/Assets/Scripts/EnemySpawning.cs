@@ -24,7 +24,7 @@ public class EnemySpawning : MonoBehaviour {
 	void Update ()
     {
         Debug.Log(condTracker.condition);
-        if (condTracker.condition == "ground" | condTracker.condition == "boss")
+        if (condTracker.condition == "ground" | condTracker.condition == "boss" | condTracker.condition == "final")
         {
             spawningGround = true;
         }
