@@ -4,6 +4,7 @@ using System;
 
 public class MenuScript : MonoBehaviour {
     public int state;
+	public GameObject frontLogo;
     public GameObject playButton;
     public GameObject playCollider;
     public GameObject continueButton;
@@ -25,11 +26,13 @@ public class MenuScript : MonoBehaviour {
         {
             playButton.SetActive(true);
             playCollider.SetActive(true);
+			frontLogo.SetActive (true);
         }
         else
         {
             playButton.SetActive(false);
             playCollider.SetActive(false);
+			frontLogo.SetActive (false);
         }
 
         if (state == 3)
