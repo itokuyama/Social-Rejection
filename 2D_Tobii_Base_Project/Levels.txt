@@ -1,11 +1,12 @@
 LevelNum ; SpawnRate ; Enemy Types ; Enemy Amount ; Pre-Time ; Post-Time ; Special Condition
-1;2;type3;1;1;2;boss
+
 1;0.5;type1;5;1;2;ground
-2;2;type2;5;1;2;none
-3;2;type2;5;1;2;none
-4;2;type2;5;1;2;none
-5;2;type2;5;1;2;none
-6;2;type2;5;1;2;none
-7;2;type2;5;1;2;none
+2;1;type2;5;1;2;none
+3;1.2;type2;10;1;2;none
+4;1.5;type2;20;1;2;none
+5;1.8;type2;25;1;2;none
+6;2;type2;25;1;2;none
+7;2;type2;30;1;2;none
+8;2;type3;1;1;2;boss
 9;1;type4;1;1;2;still
 10;5;type1;20;1;30;final
