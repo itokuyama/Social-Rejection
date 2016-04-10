@@ -3,6 +3,11 @@ using System.Collections;
 
 public class EnemyFlying : MonoBehaviour {
 
+    public AudioClip hit1;
+    public AudioClip hit2;
+    public AudioClip hit3;
+    public AudioClip hit4;
+
     public int health;
     public int totalHealth;
     public float speed;
@@ -29,6 +34,7 @@ public class EnemyFlying : MonoBehaviour {
         if (health <= 0)
         {
             Destroy(gameObject); //Enemy dies
+            SoundManager.instance.RandomizeSfx(hit1, hit2, hit3, hit4);
         }
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy" }); //Phase through other enemies
