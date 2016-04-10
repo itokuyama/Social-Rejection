@@ -8,6 +8,7 @@ public class Level : MonoBehaviour {
     public int totalLevels;
     private EnemySpawning enemyTracker;
     private LevelData statTracker;
+    private TowerController towerStuff;
     public float preTime;
     public float postTime;
     private bool alreadyChanged;
@@ -19,6 +20,7 @@ public class Level : MonoBehaviour {
 
         enemyTracker = GameObject.FindWithTag("Spawner").GetComponent<EnemySpawning>();
         statTracker = GameObject.FindWithTag("EditorOnly").GetComponent<LevelData>();
+        towerStuff = GameObject.FindWithTag("Tower").GetComponent<TowerController>();
 
         alreadyChanged = false;
 
@@ -27,7 +29,6 @@ public class Level : MonoBehaviour {
         enemyTracker.remaining = Convert.ToInt32(statTracker.GetLevel(level)[3]);
 
         enemyTracker.spawnTime = Convert.ToInt32(statTracker.GetLevel(level)[4]);
-        Debug.Log(statTracker.GetLevel(level)[3]);
 
         postTime = Convert.ToInt32(statTracker.GetLevel(level)[5]);
     }
@@ -41,8 +42,15 @@ public class Level : MonoBehaviour {
 
 	    if (enemyTracker.remaining == 0 & enemiesLeft == 0 & !alreadyChanged)
         {
-            StartCoroutine(LevelChange());
-            alreadyChanged = true;
+            if (level == statTracker.levelConfigs.GetLength(0) - 1)
+            {
+                towerStuff.winText.SetActive(true);
+            }
+            else
+            {
+                StartCoroutine(LevelChange());
+                alreadyChanged = true;
+            }
         }
         else if (enemyTracker.remaining > 0 | enemiesLeft > 0)
         {

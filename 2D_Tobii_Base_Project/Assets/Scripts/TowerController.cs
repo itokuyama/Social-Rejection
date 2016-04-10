@@ -20,6 +20,8 @@ public class TowerController : MonoBehaviour {
     public float health;
     public float totalHealth;
     public GameObject healthBar;
+    public GameObject loseText;
+    public GameObject winText;
 
 	// When you can take the next shot
 	float reloadFinished;
@@ -104,6 +106,7 @@ public class TowerController : MonoBehaviour {
         if (health <= 0)
         {
             Destroy(gameObject);
+            loseText.SetActive(true);
         }
     }
 
