@@ -1,0 +1,123 @@
+-debug
+-target:library
+-nowarn:0169
+-out:Temp/Assembly-CSharp-firstpass.dll
+-r:"C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll"
+-r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
+-r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
+-r:Assets/Plugins/x86_64/Tobii.EyeX.Client.Net20.dll
+-r:"C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll"
+-define:UNITY_5_3_OR_NEWER
+-define:UNITY_5_3_4
+-define:UNITY_5_3
+-define:UNITY_5
+-define:ENABLE_NEW_BUGREPORTER
+-define:ENABLE_AUDIO
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_FRAME_DEBUGGER
+-define:ENABLE_GENERICS
+-define:ENABLE_HOME_SCREEN
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_LIGHT_PROBES_LEGACY
+-define:ENABLE_MICROPHONE
+-define:ENABLE_MULTIPLE_DISPLAYS
+-define:ENABLE_PHYSICS
+-define:ENABLE_PLUGIN_INSPECTOR
+-define:ENABLE_SHADOWS
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:ENABLE_SPRITERENDERER_FLIPPING
+-define:ENABLE_SPRITES
+-define:ENABLE_SPRITE_POLYGON
+-define:ENABLE_TERRAIN
+-define:ENABLE_RAKNET
+-define:ENABLE_UNET
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_VR
+-define:ENABLE_WEBCAM
+-define:ENABLE_WWW
+-define:ENABLE_CLOUD_SERVICES
+-define:ENABLE_CLOUD_SERVICES_ADS
+-define:ENABLE_CLOUD_HUB
+-define:ENABLE_CLOUD_PROJECT_ID
+-define:ENABLE_CLOUD_SERVICES_PURCHASING
+-define:ENABLE_CLOUD_SERVICES_ANALYTICS
+-define:ENABLE_CLOUD_SERVICES_UNET
+-define:ENABLE_CLOUD_SERVICES_BUILD
+-define:ENABLE_CLOUD_LICENSE
+-define:ENABLE_EDITOR_METRICS
+-define:ENABLE_EDITOR_METRICS_CACHING
+-define:INCLUDE_DYNAMIC_GI
+-define:INCLUDE_GI
+-define:INCLUDE_IL2CPP
+-define:INCLUDE_DIRECTX12
+-define:PLATFORM_SUPPORTS_MONO
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_LOCALIZATION
+-define:ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION
+-define:ENABLE_EDITOR_TESTS_RUNNER
+-define:UNITY_STANDALONE_WIN
+-define:UNITY_STANDALONE
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_RUNTIME_GI
+-define:ENABLE_MOVIES
+-define:ENABLE_NETWORK
+-define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+-define:ENABLE_LOG_MIXED_STACKTRACE
+-define:ENABLE_UNITYWEBREQUEST
+-define:ENABLE_EVENT_QUEUE
+-define:ENABLE_CLUSTERINPUT
+-define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_MONO
+-define:ENABLE_PROFILER
+-define:DEBUG
+-define:TRACE
+-define:UNITY_ASSERTIONS
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_64
+-define:UNITY_EDITOR_WIN
+"Assets/Standard Assets/EyeXFramework/Components/ActivatableComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/EyePositionDataComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/EyeXEngineAvailabilityComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/FixationDataComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/GazeAwareComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/GazePointDataComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/PannableComponent.cs"
+"Assets/Standard Assets/EyeXFramework/Components/UserPresenceComponent.cs"
+"Assets/Standard Assets/EyeXFramework/EnumHelpers.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXActivatable.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXActivationHub.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXDataStreamBase.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXDeviceStatus.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXEngineAvailability.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXEngineEnumerableStateAccessor.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXEngineStateAccessor.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXEngineStateValue.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXEyePosition.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXEyePositionDataStream.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXFixationDataStream.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXFixationPoint.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXGameObjectInteractorBase.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXGazeAware.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXGazePoint.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXGazePointDataStream.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXGazeTracking.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXHost.Profile.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXHost.Tools.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXHost.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXInteractor.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXMask.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXPannable.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXPanningHub.cs"
+"Assets/Standard Assets/EyeXFramework/EyeXUserPresence.cs"
+"Assets/Standard Assets/EyeXFramework/IEyeXBehavior.cs"
+"Assets/Standard Assets/EyeXFramework/IEyeXDataProvider.cs"
+"Assets/Standard Assets/EyeXFramework/IEyeXGlobalInteractor.cs"
+"Assets/Standard Assets/EyeXFramework/ProjectedRect.cs"
+"Assets/Standard Assets/EyeXFramework/ScreenHelpers.cs"
+"Assets/Standard Assets/EyeXFramework/Win32Helpers.cs"
+"Assets/Standard Assets/EyeXFramework/WindowHelpers.cs"
+-r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
+-r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"

@@ -151,6 +151,7 @@ public class TowerController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+			Camera.main.GetComponent<ScreenShake> ().Shake (0.2f, 0.3f);
             health -= 1;
             SoundManager.instance.PlaySingle(TowerDamage);
         }
