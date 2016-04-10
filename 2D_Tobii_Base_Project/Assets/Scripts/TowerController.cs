@@ -24,10 +24,12 @@ public class TowerController : MonoBehaviour {
     public GameObject winText;
     private GameObject healthBack;
     public bool lost;
+    bool playsound = true;
 
+    public AudioClip TowerDamage;
 
-	// When you can take the next shot
-	float reloadFinished;
+    // When you can take the next shot
+    float reloadFinished;
 	LineRenderer lineRenderer;
 	// Says whether or not the player is charging a shot
 	bool charging = false;
@@ -125,6 +127,11 @@ public class TowerController : MonoBehaviour {
         {
             lost = true;
             states.state = 3;
+            if (playsound)
+            {
+                playsound = !playsound;
+                SoundManager.instance.PlaySingle(TowerDamage);
+            }
         }
     }
 
@@ -133,6 +140,7 @@ public class TowerController : MonoBehaviour {
         if (other.gameObject.CompareTag("Enemy"))
         {
             health -= 1;
+            SoundManager.instance.PlaySingle(TowerDamage);
         }
     }
 }

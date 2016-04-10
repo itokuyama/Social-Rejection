@@ -1,2 +1,3 @@
 LevelNum ; SpawnRate ; Enemy Types ; Enemy Amount ; Pre-Time ; Post-Time ; Special Conditions
+1;1;type2;10;1;2;none
 1;5;type1;20;1;30;final
