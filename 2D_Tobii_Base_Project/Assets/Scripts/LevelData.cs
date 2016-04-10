@@ -6,7 +6,7 @@ using System.IO;
 public class LevelData : MonoBehaviour {
     public List<GameObject> listOfTypes;
     public Dictionary<string, GameObject> enemyTypes;
-    private string[] levelConfigs;
+    public string[] levelConfigs;
 
     void Awake ()
     {
@@ -26,7 +26,6 @@ public class LevelData : MonoBehaviour {
 
     public string[] GetLevel(int level)
     {
-        Debug.Log(levelConfigs[level].Split(';'));
         return levelConfigs[level].Split(';');
     }
 }

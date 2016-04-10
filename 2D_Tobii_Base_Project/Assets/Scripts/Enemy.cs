@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 difference = target.transform.position - gameObject.transform.position;
+        Vector3 difference = target.transform.position - gameObject.transform.position;//Gets difference between self and target
 
         Vector3 direction = new Vector3(difference.x, difference.y, 0); //Sets enemy to always be travelling toward the tower
 
@@ -30,22 +30,18 @@ public class Enemy : MonoBehaviour {
             Destroy(gameObject); //Enemy dies
         }
 
-        Destroy(gameObject, 3);
-
-        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy" });
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy" }); //Phase through other enemies
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collided");
-
         if (other.gameObject.CompareTag("Weapon"))
         {
             health -= 1; //Enemy gets hurt
         }
         if (other.gameObject.CompareTag("Tower"))
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //Enemy dies when it reaches tower
         }
     }
 }
