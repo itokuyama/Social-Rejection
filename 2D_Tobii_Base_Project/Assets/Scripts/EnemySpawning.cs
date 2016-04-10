@@ -52,7 +52,7 @@ public class EnemySpawning : MonoBehaviour {
                 }
                 else
                 {
-                    spawnAir(-15, 10, -10);
+                    spawnAir(-15, 20, -3);
                 }
                 remaining -= 1;
             }
@@ -64,7 +64,7 @@ public class EnemySpawning : MonoBehaviour {
                 }
                 else
                 {
-                    spawnAir(15, 10, -10);
+                    spawnAir(15, 20, -3);
                 }
                 remaining -= 1;
             }
