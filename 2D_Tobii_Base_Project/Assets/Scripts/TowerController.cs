@@ -32,6 +32,7 @@ public class TowerController : MonoBehaviour {
 	public Vector2 hotspot = Vector2.zero;
 
     public AudioClip TowerDamage;
+	public AudioClip shoot;
 
     // When you can take the next shot
     float reloadFinished;
@@ -100,6 +101,7 @@ public class TowerController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp (0) && charging) {
+			SoundManager.instance.PlaySingle(shoot);
 			Cursor.SetCursor (cursorIdle, hotspot, cursorMode);
 			GameObject arrow = GameObject.Instantiate (arrowPrefab);
 
